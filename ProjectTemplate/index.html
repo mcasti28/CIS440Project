@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title></title>
+	<title>EZ Schedule</title>
 	<!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -163,6 +163,8 @@
 
         .contentContainer{
             position: relative;
+            margin: auto;
+            width: 50%;
         }
 
         .contentPanel{
@@ -177,7 +179,7 @@
     <!--<button onclick="javascript: TestButtonHandler();">Click here to test connection!</button>-->
     <div class="contentContainer">
         <div id="loginPanel" class="contentPanel loginPanel">
-            <h2>Login</h2>
+            <h2>EZ Schedule Login</h2>
             <form onsubmit="LogOn($('#userName').val(), $('#passWord').val()); return false;">
                 <div class="login">
                     <label for="userName"><b>Username:</b></label>
