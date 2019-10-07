@@ -153,7 +153,7 @@
         </div>
 
         <div id="calendarPanel" class="contentPanel" style="visibility:hidden;">
-            <form onsubmit="Shift($('#firstShift').val(), $('#my-input').val()); return false;">
+            <form onsubmit="createShift($('#firstShift').val(), $('#my-input').val()); return false;">
                 <main>
                     <article>
                         <div id="label-wrapper">
@@ -235,6 +235,26 @@
         else if (document.getElementById("firstShift").checked == true && document.getElementById("secondShift").checked == true) {
             document.getElementById("firstShift").value = 2;
         }
+    }
+
+    function createShift(shift, date, id) {
+        var webMethod = "ProjectServices.asmx/Shift";
+        var parameters = "{\"shift\":\"" + encodeURI(shift) + "\",\"date\":\"" + encodeURI(date) + "\",\"idEmployee\":\"" + encodeURI(id);
+
+        $.ajax({
+            type: "POST",
+            url: webMethod,
+            data: parameters,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                // showPanel('logonPanel');
+                alert("Successfully created shift");
+            },
+            error: function (e) {
+                alert("boo...");
+            }
+        });
     }
 
     //function hideTimeOptions() {

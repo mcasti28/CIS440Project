@@ -111,6 +111,8 @@ namespace ProjectTemplate
         [WebMethod(EnableSession = true)]
         public void Shift(int shift, string date, int idEmployee)
         {
+            Session["idEmployee"] = idEmployee;
+
             string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["group1"].ConnectionString;
             //the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
             //does is tell mySql server to return the primary key of the last inserted row.
