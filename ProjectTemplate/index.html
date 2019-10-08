@@ -237,9 +237,10 @@
         }
     }
 
-    function createShift(shift, date, id) {
+    function createShift(shift, date) {
         var webMethod = "ProjectServices.asmx/Shift";
-        var parameters = "{\"shift\":\"" + encodeURI(shift) + "\",\"date\":\"" + encodeURI(date) + "\",\"idEmployee\":\"" + encodeURI(id);
+        var parameters = "{\"shift\":\"" + encodeURI(shift) + "\",\"date\":\"" + encodeURI(date) + "\"}";
+        //var parameters = "{\"shift\":\"" + encodeURI(shift) + "\",\"date\":\"" + encodeURI(date);
 
         $.ajax({
             type: "POST",
