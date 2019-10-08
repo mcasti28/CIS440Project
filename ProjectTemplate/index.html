@@ -125,6 +125,30 @@
             
         }
 
+        header {
+            text-align: center;
+            background-color: tomato;
+            overflow: auto;
+            padding: 10px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+
+
+        }
+
+        footer {
+            text-align: center;
+            background-color: tomato;
+            overflow: auto;
+            padding: 10px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            clear: both;
+            bottom: 0;
+        }
+
     </style>
     <!--END OF YOUR OWN CSS-->
 
@@ -143,7 +167,8 @@
                     <label for="passWord"><b>Password:</b></label>
                     <input type="password" placeholder="Enter Password" id="passWord" required>
 
-                    <button type="submit">Login</button>
+                    <button style="background-color: dodgerblue" type="submit">Login</button>
+                  
 
                     <!--<label>
                         <input type="checkbox" checked="checked" name="rememberMe">Remember Me
@@ -153,6 +178,7 @@
         </div>
 
         <div id="calendarPanel" class="contentPanel" style="visibility:hidden;">
+            <!--<header>EZ Schedule</header>-->
             <form onsubmit="createShift($('#firstShift').val(), $('#my-input').val()); return false;">
                 <main>
                     <article>
@@ -165,20 +191,22 @@
                     </article>
                 </main>
 
-                    <div class="availabilityContainer">
-                        <!--<input type="radio" name="availability" onclick="hideTimeOptions()" value="0"> Available All Day<br>-->
-                        <input type="checkbox" id="availability" onclick="displayTimeOptions()" value="1"> Available<br>
+                <div class="availabilityContainer">
+                    <!--<input type="radio" name="availability" onclick="hideTimeOptions()" value="0"> Available All Day<br>-->
+                    <input type="checkbox" id="availability" onclick="displayTimeOptions()" value="1"> Available<br>
 
-                        <div id="timeOptions">
-                            <input type="checkbox" id="firstShift" onclick="assignShift()"> 9:00 - 1:00<br>
-                            <input type="checkbox" id="secondShift" onclick="assignShift()"> 1:00 - 5:00<br>
-                        </div>
-
-                        <button type="submit">Submit</button>
-                        <!--<button onclick="submitFunction">Submit</button>-->
-
+                    <div id="timeOptions">
+                        <input type="checkbox" id="firstShift" onclick="assignShift()"> 9:00 - 1:00<br>
+                        <input type="checkbox" id="secondShift" onclick="assignShift()"> 1:00 - 5:00<br>
                     </div>
+
+                    <button type="submit">Submit</button>
+                    <button type="button" onclick="LogOff()">Log Off</button>
+                    <!--<button onclick="submitFunction">Submit</button>-->
+
+                </div>
             </form>
+            
             <!--<main>
                 <article>
                     <div id="label-wrapper">
@@ -208,7 +236,7 @@
 
         </div>
     </div>
-
+    <!--<footer>Scrummy Bears</footer>-->
 </body>
 
 <script type="text/javascript">
@@ -300,6 +328,13 @@
         }
     }
 
+    //just hides the menu
+    function HideMenu() {
+
+        $("#calendarPanel").css("visibility", "hidden");
+        //$("#adminLink").text("");
+    }
+
     function LogOn(userName, pass) {
         //the url of the webservice we will be talking to
         var webMethod = "ProjectServices.asmx/LogOn";
@@ -348,6 +383,35 @@
                 //then this function mapped to the error key is executed rather
                 //than the one mapped to the success key.  This is just a garbage
                 //alert becaue I'm lazy
+                alert("boo...");
+            }
+        });
+    }
+
+    //logs the user off both at the client and at the server
+    function LogOff() {
+
+        var webMethod = "ProjectServices.asmx/LogOff";
+        $.ajax({
+            type: "POST",
+            url: webMethod,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                if (msg.d) {
+                    //we logged off, so go back to logon page,
+                    //stop checking messages
+                    //and clear the chat panel
+                    document.getElementById('userName').value = '';
+                    document.getElementById('passWord').value = '';
+                    showPanel('loginPanel');
+                    HideMenu();
+                    
+                }
+                else {
+                }
+            },
+            error: function (e) {
                 alert("boo...");
             }
         });
