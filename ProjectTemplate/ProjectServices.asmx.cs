@@ -97,11 +97,9 @@ namespace ProjectTemplate
             //a legit account
             if (sqlDt.Rows.Count > 0)
             {
-                //if we found an account, store the id and admin status in the session
-                //so we can check those values later on other method calls to see if they 
-                //are 1) logged in at all, and 2) and admin or not
+                //if we found an account, store the id in the session
+                //so we can check those values later on other method calls 
                 Session["idEmployee"] = sqlDt.Rows[0]["idEmployee"];
-                //Session["admin"] = sqlDt.Rows[0]["admin"];
                 success = true;
             }
             //return the result!
@@ -121,9 +119,6 @@ namespace ProjectTemplate
         [WebMethod(EnableSession = true)]
         public void Shift(int shift, string date)
         {
-            //bool success = false;
-
-            //Session["idEmployee"] = idEmployee;
             if (Session["idEmployee"] != null)
             {
                 string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["group1"].ConnectionString;

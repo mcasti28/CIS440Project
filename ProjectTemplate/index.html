@@ -8,11 +8,6 @@
     <script src="the-datepicker.js"></script>
     <link rel="stylesheet" href="the-datepicker.css">
 
-    <!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
-    <!--<script type="text/javascript">
-
-    </script>-->
-    <!--END OF YOUR OWN JAVASCRIPT-->
 
     <!--AND YOUR OWN CSS CAN GO HERE AS WELL-->
     <style>
@@ -55,19 +50,6 @@
                 text-align: center;
             }
 
-        /*.container {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        .form-inline {
-            text-align: center;
-        }*/
-
         .contentContainer {
             position: relative;
             margin: auto;
@@ -76,19 +58,14 @@
 
         .contentPanel {
             position: absolute;
-            /*visibility: hidden;*/
         }
 
-
-
-        article {
-            /*float: left;*/
+        article {           
             margin: auto;
             width: 90%;
         }
 
-        #label-wrapper {
-            /*float: left;*/
+        #label-wrapper {           
             margin: auto;
             width: 80%;
         }
@@ -125,37 +102,12 @@
             
         }
 
-        header {
-            text-align: center;
-            background-color: tomato;
-            overflow: auto;
-            padding: 10px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-
-
-        }
-
-        footer {
-            text-align: center;
-            background-color: tomato;
-            overflow: auto;
-            padding: 10px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            clear: both;
-            bottom: 0;
-        }
-
     </style>
     <!--END OF YOUR OWN CSS-->
 
 </head>
 
 <body>
-    <!--<button onclick="javascript: TestButtonHandler();">Click here to test connection!</button>-->
     <div class="contentContainer">
         <div id="loginPanel" class="contentPanel loginPanel">
             <h2>EZ Schedule Login</h2>
@@ -167,18 +119,12 @@
                     <label for="passWord"><b>Password:</b></label>
                     <input type="password" placeholder="Enter Password" id="passWord" required>
 
-                    <button style="background-color: dodgerblue" type="submit">Login</button>
-                  
-
-                    <!--<label>
-                        <input type="checkbox" checked="checked" name="rememberMe">Remember Me
-                    </label>-->
+                    <button style="background-color: dodgerblue" type="submit">Login</button>                           
                 </div>
             </form>
         </div>
 
         <div id="calendarPanel" class="contentPanel" style="visibility:hidden;">
-            <!--<header>EZ Schedule</header>-->
             <form onsubmit="createShift($('#firstShift').val(), $('#my-input').val()); return false;">
                 <main>
                     <article>
@@ -192,7 +138,6 @@
                 </main>
 
                 <div class="availabilityContainer">
-                    <!--<input type="radio" name="availability" onclick="hideTimeOptions()" value="0"> Available All Day<br>-->
                     <input type="checkbox" id="availability" onclick="displayTimeOptions()" value="1"> Available<br>
 
                     <div id="timeOptions">
@@ -202,41 +147,10 @@
 
                     <button type="submit">Submit</button>
                     <button type="button" onclick="LogOff()">Log Off</button>
-                    <!--<button onclick="submitFunction">Submit</button>-->
-
                 </div>
             </form>
-            
-            <!--<main>
-                <article>
-                    <div id="label-wrapper">
-                        <label for="my-input">Date:</label>
-                    </div>
-                    <div id="input-wrapper">
-                        <input type="text" id="my-input" size="20">
-                    </div>
-                </article>
-            </main>-->
-
-            <!--<form>
-                <div class="availabilityContainer">-->
-                    <!--<input type="radio" name="availability" onclick="hideTimeOptions()" value="0"> Available All Day<br>-->
-                    <!--<input type="checkbox" id="availability" onclick="displayTimeOptions()" value="1"> Available<br>
-
-                    <div id="timeOptions">
-                        <input type="checkbox" id="firstShift" value="0"> 9:00 - 1:00<br>
-                        <input type="checkbox" id="secondShift" value="1"> 1:00 - 5:00<br>
-                    </div>
-
-                    <button type="submit">Submit</button>-->
-                    <!--<button onclick="submitFunction">Submit</button>-->
-
-                <!--</div>
-            </form>-->
-
         </div>
     </div>
-    <!--<footer>Scrummy Bears</footer>-->
 </body>
 
 <script type="text/javascript">
@@ -268,7 +182,6 @@
     function createShift(shift, date) {
         var webMethod = "ProjectServices.asmx/Shift";
         var parameters = "{\"shift\":\"" + encodeURI(shift) + "\",\"date\":\"" + encodeURI(date) + "\"}";
-        //var parameters = "{\"shift\":\"" + encodeURI(shift) + "\",\"date\":\"" + encodeURI(date);
 
         $.ajax({
             type: "POST",
@@ -277,7 +190,6 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (msg) {
-                // showPanel('logonPanel');
                 alert("Successfully created shift");
             },
             error: function (e) {
@@ -285,13 +197,6 @@
             }
         });
     }
-
-    //function hideTimeOptions() {
-    //    document.getElementById("timeOptions").style.display = "none";
-    //    document.getElementById("firstShift").checked = false;
-    //    document.getElementById("secondShift").checked = false;
-    //}
-
 
     var contentPanels = ['loginPanel', 'calendarPanel'];
     function TestButtonHandler() {
@@ -317,7 +222,6 @@
 
     //this function toggles which panel is showing, and also clears data from all panels
     function showPanel(panelId) {
-        //clearData();
         for (var i = 0; i < contentPanels.length; i++) {
             if (panelId == contentPanels[i]) {
                 $("#" + contentPanels[i]).css("visibility", "visible");
@@ -330,9 +234,7 @@
 
     //just hides the menu
     function HideMenu() {
-
         $("#calendarPanel").css("visibility", "hidden");
-        //$("#adminLink").text("");
     }
 
     function LogOn(userName, pass) {
@@ -344,7 +246,6 @@
         //escape the double quotes (because the overall string we're creating is in double quotes!)
         var parameters = "{\"userName\":\"" + encodeURI(userName) + "\",\"pass\":\"" + encodeURI(pass) + "\"}";
 
-        //alert(parameters);
 
         //jQuery ajax method
         $.ajax({
@@ -367,9 +268,8 @@
                 //to a generic property of the server response called d (I assume short for data
                 //but honestly I don't know...)
                 if (msg.d) {
-                    //server replied true, so show the accounts panel
+                    //server replied true, so show the calendar panel
                     showPanel('calendarPanel');
-                    //LoadAccounts();
                 }
                 else {
                     //server replied false, so let the user know
@@ -421,13 +321,10 @@
     //ready for business.  Usually, if we're wiring up event handlers via jQuery
     //then this is where they go.
     jQuery(function () {
-        //when the app loads, show the logon panel to start with!
+        //when the app loads, show the login panel to start with!
         showPanel('loginPanel');
     });
 
-    function Shift(shift, date, idEmployee) {
-
-    }
 </script>
 
 <script>
